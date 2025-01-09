@@ -6,7 +6,7 @@
 /*   By: kokamoto <kokamoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:36:46 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/08 23:15:50 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:14:53 by kokamoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_pipex
 }			t_pipex;
 
 void		error_exit(char *msg);
+void		init_pipes(t_pipex *px, int argc, char **argv, char **envp);
 void		create_pipes(t_pipex *px);
 void		close_pipes(t_pipex *px);
 void		handle_here_doc(char *limiter);
