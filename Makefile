@@ -6,7 +6,7 @@
 #    By: kokamoto <kokamoto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/08 22:35:55 by kokamoto          #+#    #+#              #
-#    Updated: 2025/01/08 23:19:19 by kokamoto         ###   ########.fr        #
+#    Updated: 2025/01/10 22:03:16 by kokamoto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS = src/pipe.c \
        src/utils/ft_strncmp.c \
        src/utils/ft_strdup.c \
        src/utils/ft_strcmp.c \
-	   src/utils/ft_strlcpy.c
+	src/utils/ft_strlcpy.c
 
 OBJS = $(SRCS:.c=.o)
 
