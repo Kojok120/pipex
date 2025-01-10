@@ -6,7 +6,7 @@
 /*   By: kokamoto <kokamoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:44:05 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/08 23:21:54 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/01/10 21:57:17 by kokamoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	handle_here_doc(char *limiter)
 	while (1)
 	{
 		write(STDOUT_FILENO, "heredoc> ", 9);
-		if (get_next_line(STDIN_FILENO, &line) <= 0)
+		line = get_next_line(STDIN_FILENO);
+		if (line <= 0)
 			exit(1);
 		if (!ft_strcmp(line, limiter))
 		{

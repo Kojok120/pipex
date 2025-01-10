@@ -6,7 +6,7 @@
 /*   By: kokamoto <kokamoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:36:46 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/09 20:14:53 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/01/10 22:00:22 by kokamoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		close_pipes(t_pipex *px);
 void		handle_here_doc(char *limiter);
 char		*get_cmd_path(char *cmd, char **envp);
 void		execute_cmd(char *cmd, char **envp);
-int			handle_first_cmd(t_pipex *px);
+void		handle_first_cmd(t_pipex *px);
 void		handle_middle_cmd(t_pipex *px, int i);
 void		handle_last_cmd(t_pipex *px, int i);
 

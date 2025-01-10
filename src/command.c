@@ -6,7 +6,7 @@
 /*   By: kokamoto <kokamoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:42:06 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/08 22:48:46 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/01/10 22:00:09 by kokamoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,28 @@ void	execute_cmd(char *cmd, char **envp)
 		error_exit("Command not found");
 	if (execve(cmd_path, cmd_args, envp) == -1)
 		error_exit("Execve error");
+}
+
+void	handle_first_cmd(t_pipex *px)
+{
+	int	infile;
+
+	if (px->here_doc)
+		handle_here_doc(px->limiter);
+	else
+	{
+		infile = open(px->argv[1], O_RDONLY);
+		if (infile == -1)
+			error_exit("Infile error");
+		if (dup2(infile, STDIN_FILENO) == -1)
+			error_exit("Dup2 error");
+		close(infile);
+	}
+	if (dup2(px->pipes[0][1], STDOUT_FILENO) == -1)
+		error_exit("Dup2 error");
+	close(px->pipes[0][0]);
+	close(px->pipes[0][1]);
+	execute_cmd(px->argv[2 + px->here_doc], px->envp);
 }
 
 void	handle_middle_cmd(t_pipex *px, int i)
