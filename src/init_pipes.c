@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_pipe.c                                        :+:      :+:    :+:   */
+/*   init_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kokamoto <kojokamo120@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:08:35 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/13 20:08:43 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/01/13 20:11:14 by kokamoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_pipes(t_pipex *px, int argc, char **argv, char **envp)
 	if (argc >= 6 && !ft_strcmp(argv[1], "here_doc"))
 	{
 		px->here_doc = 1;
-		px->limiter = argv[2];
+		px->limiter = ft_strjoin(argv[2], "\n");
 	}
 	if (!px->here_doc && argc < 5)
 	{
