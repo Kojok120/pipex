@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kokamoto <kokamoto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kokamoto <kojokamo120@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:43:05 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/09 20:14:53 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:00:07 by kokamoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	init_pipes(t_pipex *px, int argc, char **argv, char **envp)
 	}
 	if (!px->here_doc && argc < 5)
 	{
-		write(2, "Usage: ./pipex infile cmd1 cmd2 ... cmdn outfile\n", 47);
+		write(2, "Usage: ./pipex infile cmd1 cmd2 ... cmdn outfile\n", 49);
 		write(2, "   or: ./pipex here_doc LIMITER cmd1 cmd2 ... cmdn outfile\n",
-			57);
+			58);
 		exit(1);
 	}
 	px->cmd_count = argc - 3 - px->here_doc;
