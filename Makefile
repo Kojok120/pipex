@@ -6,7 +6,7 @@
 #    By: kokamoto <kojokamo120@gmail.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/08 22:35:55 by kokamoto          #+#    #+#              #
-#    Updated: 2025/01/13 14:53:00 by kokamoto         ###   ########.fr        #
+#    Updated: 2025/01/13 20:09:13 by kokamoto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = pipex
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = src/pipe.c \
+SRCS = src/init_pipes.c \
+       src/close_pipes.c \
        src/here_doc.c \
        src/command.c \
        src/main.c \

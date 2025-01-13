@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   init_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kokamoto <kojokamo120@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 22:43:05 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/13 15:00:07 by kokamoto         ###   ########.fr       */
+/*   Created: 2025/01/13 20:08:35 by kokamoto          #+#    #+#             */
+/*   Updated: 2025/01/13 20:08:43 by kokamoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,4 @@ void	create_pipes(t_pipex *px)
 			error_exit("Pipe error");
 		i++;
 	}
-}
-
-void	close_pipes(t_pipex *px)
-{
-	int	i;
-
-	i = 0;
-	while (i < px->cmd_count - 1)
-	{
-		close(px->pipes[i][0]);
-		close(px->pipes[i][1]);
-		free(px->pipes[i]);
-		i++;
-	}
-	free(px->pipes);
 }
