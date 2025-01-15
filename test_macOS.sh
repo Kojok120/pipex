@@ -10,7 +10,7 @@ touch output.txt
 
 #オリジナルpipexの挙動
 echo "\\npipex:"
-valgrind --leak-check=full -q ./pipex input_no_exist.txt "grep a1" "wc -w" output.txt
+./pipex input_no_exist.txt "grep a1" "wc -w" output.txt
 cat output.txt
 
 echo "-------- Mandatory Error Output2 No command-----------"
@@ -24,7 +24,7 @@ touch output.txt
 
 #オリジナルpipexの挙動
 echo "\\npipex:"
-valgrind --leak-check=full -q ./pipex input.txt "" "" output.txt
+./pipex input.txt "" "" output.txt
 cat output.txt
 
 echo "-------- Mandatory Correct Output1 -----------"
@@ -39,7 +39,7 @@ touch output.txt
 
 #オリジナルpipexの挙動
 echo "\\npipex:"
-valgrind --leak-check=full -q ./pipex input.txt "grep a1" "wc -w" output.txt
+./pipex input.txt "grep a1" "wc -w" output.txt
 cat output.txt
 
 echo "-------- Mandatory Correct Output2 -----------"
@@ -54,5 +54,5 @@ touch output.txt
 
 #オリジナルpipexの挙動
 echo "\\npipex:"
-valgrind --leak-check=full -q ./pipex input.txt "ls -l" "wc -l" output.txt
+./pipex input.txt "ls -l" "wc -l" output.txt
 cat output.txt
