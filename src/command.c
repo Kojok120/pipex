@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kokamoto <kojokamo120@gmail.com>           +#+  +:+       +#+        */
+/*   By: kokamoto <kokamoto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:42:06 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/13 16:16:25 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/01/15 23:40:05 by kokamoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	execute_cmd(char *cmd, char **envp)
 	char	*cmd_path;
 
 	cmd_args = ft_split(cmd, ' ');
-	// cmd_argsの中身を表示
-	printf("cmd_args: %s\n", cmd_args[0]);
+	// cmd_argsの中身を表示.heredocの場合これはoutput.txtに入っちゃう。
+	// printf("cmd_args: %s\n", cmd_args[0]);
 	cmd_path = get_cmd_path(cmd_args[0], envp);
 	if (!cmd_path)
 		error_exit("Command not found");
@@ -68,7 +68,8 @@ void	handle_first_cmd(t_pipex *px)
 			error_exit("Dup2 error");
 		close(infile);
 	}
-	printf("first_cmd");
+	//here_docだと下のが入っちゃう
+	// printf("first_cmd");
 	if (dup2(px->pipes[0][1], STDOUT_FILENO) == -1)
 		error_exit("Dup2 error");
 	close(px->pipes[0][0]);
