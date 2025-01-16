@@ -1,0 +1,22 @@
+
+"-------- Bonus Error1 存在しないコマンド"
+Original:
+hoge << EOF | wc -w >> output.txt
+
+pipex:
+valgrind --leak-check=full -q ./pipex here_doc EOF "hoge" "wc -w" output.txt
+
+"-------- Bonus 試してみるコマンド1 -----------"
+Original：
+grep a1 << EOF | wc -w >> output.txt
+
+pipex:
+valgrind --leak-check=full -q ./pipex here_doc EOF "grep a1" "wc -w" output.txt
+
+
+"-------- Bonus 試してみるコマンド2 -----------"
+Original：
+ls -a << EOF | wc -l >> output.txt
+
+pipex:
+valgrind --leak-check=full -q ./pipex here_doc EOF "ls -a" "wc -l" output.txt
