@@ -6,7 +6,7 @@
 /*   By: kokamoto <kojokamo120@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:42:06 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/28 14:16:47 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:32:26 by kokamoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,24 @@ char	**get_cmd_path(char **envp)
 {
 	char	**paths;
 
-	// int		i;
-
 	while (*envp && ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	if (!*envp)
 		return (NULL);
 	paths = ft_split(*envp + 5, ':');
-	// i = 0;
-	// while (paths[i])
-	// {
-	// 	part_path = ft_strjoin(paths[i], "/");
-	// 	path = ft_strjoin(part_path, cmd);
-	// 	free(part_path);
-	// 	if (access(path, F_OK | X_OK) == 0)
-	// 		return (path);
-	// 	free(path);
-	// 	i++;
-	// }
-	// return (NULL);
 	return (paths);
 }
 
 void	execute_cmd(char *cmd, char **envp)
 {
 	char	**cmd_args;
-	char	*cmd_path = NULL;
-		char	**paths;
-	int i;
+	char	**paths;
+	int		i;
 	char	*path;
 	char	*part_path;
 
 	cmd_args = ft_split(cmd, ' ');
-	// cmd_argsの中身を表示.heredocの場合これはoutput.txtに入っちゃう。
-	// printf("cmd_args: %s\n", cmd_args[0]);
+	path = NULL;
 	paths = get_cmd_path(envp);
 	i = 0;
 	while (paths[i])
@@ -57,17 +41,14 @@ void	execute_cmd(char *cmd, char **envp)
 		part_path = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(part_path, cmd_args[0]);
 		free(part_path);
-		if (access(path, F_OK | X_OK) == 0)
-		{	cmd_path = path;
-			break;
-		}
+		if (access(path, F_OK | X_OK) == 0 || !paths[i + 1])
+			break ;
 		free(path);
 		i++;
 	}
-
-	if (!cmd_path)
+	if (!path)
 		error_exit("Command not found");
-	if (execve(cmd_path, cmd_args, envp) == -1)
+	if (execve(path, cmd_args, envp) == -1)
 		error_exit("Execve error");
 }
 
@@ -86,8 +67,6 @@ void	handle_first_cmd(t_pipex *px)
 			error_exit("Dup2 error");
 		close(infile);
 	}
-	//here_docだと下のが入っちゃう
-	// printf("first_cmd");
 	if (dup2(px->pipes[0][1], STDOUT_FILENO) == -1)
 		error_exit("Dup2 error");
 	close(px->pipes[0][0]);
