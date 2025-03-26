@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kokamoto <kokamoto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kojok <kojok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:41:34 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/08 22:50:18 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/03/26 06:04:37 by kojok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error_exit(char *msg)
+void	perror_exit(char *msg)
 {
 	perror(msg);
+	exit(1);
+}
+
+void	error_exit_msg(char *msg)
+{
+	write(STDERR_FILENO, msg, ft_strlen(msg));
 	exit(1);
 }

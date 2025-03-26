@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kokamoto <kojokamo120@gmail.com>           +#+  +:+       +#+        */
+/*   By: kojok <kojok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:36:46 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/28 14:18:17 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/03/26 05:59:28 by kojok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct s_pipex
 	pid_t	*pids;
 }			t_pipex;
 
-void		error_exit(char *msg);
+void		perror_exit(char *msg);
+void		error_exit_msg(char *msg);
 void		init_pipes(t_pipex *px, int argc, char **argv, char **envp);
 void		create_pipes(t_pipex *px);
 void		close_pipes(t_pipex *px);

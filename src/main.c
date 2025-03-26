@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kokamoto <kojokamo120@gmail.com>           +#+  +:+       +#+        */
+/*   By: kojok <kojok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:36:50 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/28 12:25:36 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/03/26 05:59:02 by kojok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		px.pids[i] = fork();
 		if (px.pids[i] == -1)
-			error_exit("Fork error");
+			perror_exit("Fork error");
 		if (px.pids[i] == 0)
 		{
 			if (i == 0)

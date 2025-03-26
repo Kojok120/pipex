@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kokamoto <kojokamo120@gmail.com>           +#+  +:+       +#+        */
+/*   By: kojok <kojok@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:42:06 by kokamoto          #+#    #+#             */
-/*   Updated: 2025/01/28 14:32:26 by kokamoto         ###   ########.fr       */
+/*   Updated: 2025/03/26 06:06:18 by kojok            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	execute_cmd(char *cmd, char **envp)
 		free(path);
 		i++;
 	}
-	if (!path)
-		error_exit("Command not found");
+	if (!path || !cmd_args || !cmd_args[0])
+		error_exit_msg("command not found\n");
 	if (execve(path, cmd_args, envp) == -1)
-		error_exit("Execve error");
+		perror_exit("Execve error");
 }
 
 void	handle_first_cmd(t_pipex *px)
@@ -62,13 +62,13 @@ void	handle_first_cmd(t_pipex *px)
 	{
 		infile = open(px->argv[1], O_RDONLY);
 		if (infile == -1)
-			error_exit("Infile error");
+			perror_exit("Infile error");
 		if (dup2(infile, STDIN_FILENO) == -1)
-			error_exit("Dup2 error");
+			perror_exit("Dup2 error");
 		close(infile);
 	}
 	if (dup2(px->pipes[0][1], STDOUT_FILENO) == -1)
-		error_exit("Dup2 error");
+		perror_exit("Dup2 error");
 	close(px->pipes[0][0]);
 	close(px->pipes[0][1]);
 	execute_cmd(px->argv[2 + px->here_doc], px->envp);
@@ -77,9 +77,9 @@ void	handle_first_cmd(t_pipex *px)
 void	handle_middle_cmd(t_pipex *px, int i)
 {
 	if (dup2(px->pipes[i - 1][0], STDIN_FILENO) == -1)
-		error_exit("Dup2 error");
+		perror_exit("Dup2 error");
 	if (dup2(px->pipes[i][1], STDOUT_FILENO) == -1)
-		error_exit("Dup2 error");
+		perror_exit("Dup2 error");
 	close(px->pipes[i - 1][0]);
 	close(px->pipes[i - 1][1]);
 	close(px->pipes[i][0]);
@@ -99,11 +99,11 @@ void	handle_last_cmd(t_pipex *px, int i)
 		flags |= O_TRUNC;
 	outfile = open(px->argv[px->cmd_count + 2 + px->here_doc], flags, 0644);
 	if (outfile == -1)
-		error_exit("Outfile error");
+		perror_exit("Outfile error");
 	if (dup2(px->pipes[i - 1][0], STDIN_FILENO) == -1)
-		error_exit("Dup2 error");
+		perror_exit("Dup2 error");
 	if (dup2(outfile, STDOUT_FILENO) == -1)
-		error_exit("Dup2 error");
+		perror_exit("Dup2 error");
 	close(px->pipes[i - 1][0]);
 	close(px->pipes[i - 1][1]);
 	close(outfile);
